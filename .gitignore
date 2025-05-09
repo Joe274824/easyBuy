@@ -1,0 +1,11 @@
+# Ignore node_modules
+/frontend/node_modules
+/backend/target
+
+# IntelliJ / VS Code
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

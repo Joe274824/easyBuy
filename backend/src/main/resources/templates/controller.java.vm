@@ -1,0 +1,61 @@
+## ---------- Controller ----------
+package ${package.Controller};
+
+import ${package.Service}.${table.serviceName};
+import ${package.Entity}.${entity};
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.easyBuy.backend.common.Result;
+import jakarta.annotation.Resource;
+import org.springframework.web.bind.annotation.*;
+#if($swagger)            ## swagger 可选
+import io.swagger.v3.oas.annotations.tags.Tag;
+#end
+
+/**
+ * $!{table.comment} Controller
+ * @author ${author}
+ * @since ${date}
+ */
+#if($swagger)
+@Tag(name = "${entity} API")
+#end
+@RestController
+@RequestMapping("/api/${table.entityPath}")
+public class ${table.controllerName} {
+
+@Resource
+private ${table.serviceName} ${table.entityPath}Service;
+
+/** 新增 */
+@PostMapping
+public Result<?> add(@RequestBody ${entity} body) {
+    return Result.success(${table.entityPath}Service.save(body));
+}
+
+/** 修改 */
+@PutMapping
+public Result<?> update(@RequestBody ${entity} body) {
+    return Result.success(${table.entityPath}Service.updateById(body));
+}
+
+/** 删除 */
+@DeleteMapping("/{id}")
+public Result<?> delete(@PathVariable String id) {
+    return Result.success(${table.entityPath}Service.removeById(id));
+}
+
+/** 详情 */
+@GetMapping("/{id}")
+public Result<${entity}> detail(@PathVariable String id) {
+    return Result.success(${table.entityPath}Service.getById(id));
+}
+
+/** 分页列表 */
+@GetMapping
+public Result<Page<${entity}>> list(
+        @RequestParam(defaultValue = "1") long page,
+        @RequestParam(defaultValue = "10") long size) {
+    return Result.success(
+                ${table.entityPath}Service.page(new Page<>(page, size)));
+}
+}

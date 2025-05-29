@@ -1,4 +1,4 @@
-package com.easybuy.backend;
+package com.easyBuy.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
